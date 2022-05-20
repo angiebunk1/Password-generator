@@ -1,18 +1,23 @@
 // Assignment code here
-
+var lowercase = "";
+var uppercase = "";
+var numbers = "";
+var special = "";
+var characters = "";
+var length = "";
 
 // Ask user how long they need the password to be
 var askLength = function() {
 
-var promptLength = window.prompt(
+length = window.prompt(
   "How many characters does your password need? Please enter a number between 8 and 128."
 );
 
 // Convert response to number
-promptLength = parseInt(promptLength);
+length = parseInt(length);
 
 // If it falls within parameters, move on to types function
-if (promptLength >= 8 && promptLength <= 128) {
+if (length >= 8 && length <= 128) {
     askTypes();
 }
 
@@ -35,46 +40,29 @@ var askTypes = function() {
       lowercase = "abcdefghijklmnopqrstuvwzyz";
     }
 
-    //if not, add empty
-    if (!confirmLowercase) {
-      var lowercase = "";
-    }
-
-    //ask uppercase
+       //ask uppercase
     var confirmUppercase = window.confirm("Do you want to include uppercase letters?");
 
     //if so, add values
     if (confirmUppercase) {
-      var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     }
-    //if not, add empty
-    if (!confirmUppercase) {
-      var uppercase = "";
-    }
-
+    
     //ask numbers
     var confirmNumbers = window.confirm("Do you want to include numbers?");
 
     //if so, add values
     if (confirmNumbers) {
-      var numbers = "0123456789";
+      numbers = "0123456789";
     }
-    //if not, add empty
-    if (!confirmNumbers) {
-      var numbers = "";
-    }
-
+    
     //ask special
     var confirmSpecial = window.confirm("Do you want to include special characters?");
     // if so, add values
     if (confirmSpecial) {
-      var special = "!#$%&*^+~/?@-_";
+      special = "!#$%&*^+~/?@-_";
     }
-    //if not, add empty
-    if (!confirmSpecial) {
-      var special = "";
-    }
-
+  
     // if all are false, alert and return to beginning
     if (!confirmLowercase && !confirmUppercase && !confirmNumbers && !confirmSpecial) {
       window.alert("Please say OK for at least one category.");
@@ -82,21 +70,21 @@ var askTypes = function() {
     }
 
     // add all values together in one string
-    var characters = lowercase + uppercase + numbers + special;
+    characters = lowercase + uppercase + numbers + special;
 
-}
+};
 
 
 //password generator...how to I use variables correctly?
 var generatePassword = function() {
-  var char = characters;
-  var length = promptLength;
-  var password = "";
+   var password = "";
 
   for (var i = 0; i <= length; i++) {
-    var randomNumber = Math.floor(Math.random() * char.length);
-    password += char.substring(randomNumber, randomNumber +1);
+    var randomNumber = Math.floor(Math.random() * characters.length);
+    password += characters.substring(randomNumber, randomNumber +1);
   }
+
+  return password;
 
 // am I missing anything else here? How will it run with the next function? 
 
@@ -109,6 +97,8 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
+  askLength();
+
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
