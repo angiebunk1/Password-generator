@@ -1,4 +1,4 @@
-// Assignment code here
+
 var lowercase = "";
 var uppercase = "";
 var numbers = "";
